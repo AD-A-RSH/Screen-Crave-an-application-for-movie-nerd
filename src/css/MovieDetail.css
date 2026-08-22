@@ -1,0 +1,421 @@
+/* Movie Details page — full-bleed hero, contained sections below.
+   Button (.btn-primary/.btn-secondary) and .section-title styles are
+   shared (see App.css); this file only has what's specific to this page. */
+
+.md-page {
+  width: 100%;
+}
+
+.md-container {
+  width: min(100%, var(--page-width));
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 3vw, 3rem) clamp(var(--space-6), 4vw, var(--space-7));
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+
+.md-hero {
+  position: relative;
+  margin: 0 auto;
+  padding: clamp(var(--space-5), 4vw, 2.5rem) clamp(1.25rem, 3vw, 3rem);
+}
+
+.md-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.md-hero-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.28;
+}
+
+.md-hero-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(9, 10, 13, 0.2) 0%, var(--color-background) 92%);
+}
+
+.md-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: clamp(var(--space-5), 3vw, 2.5rem);
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.md-poster {
+  flex-shrink: 0;
+  width: clamp(140px, 22vw, 200px);
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.md-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.md-hero-content {
+  flex: 1;
+  min-width: 240px;
+  padding-bottom: 0.25rem;
+}
+
+.md-title {
+  color: #ffffff;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.md-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.md-badge {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: rgba(9, 10, 13, 0.6);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.md-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* ── Add to List dropdown ─────────────────────────────────────────────── */
+
+.md-add-to-list {
+  position: relative;
+}
+
+.md-add-to-list-panel {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.5rem);
+  z-index: 20;
+  width: 260px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.md-add-to-list-empty {
+  margin-bottom: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.md-add-to-list-items {
+  display: flex;
+  flex-direction: column;
+  max-height: 160px;
+  margin-bottom: var(--space-3);
+  overflow-y: auto;
+  gap: 0.15rem;
+}
+
+.md-add-to-list-item {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-align: left;
+  transition: background-color 150ms ease;
+}
+
+.md-add-to-list-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.md-add-to-list-form {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.md-add-to-list-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: rgba(9, 10, 13, 0.88);
+  color: var(--color-text);
+  font-size: 0.85rem;
+}
+
+.md-add-to-list-status {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+/* ── Generic sections ─────────────────────────────────────────────────── */
+
+.md-section {
+  margin-top: clamp(var(--space-6), 4vw, 2.75rem);
+}
+
+.md-story {
+  max-width: 68ch;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* ── Movie Information ────────────────────────────────────────────────── */
+
+.md-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-5);
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.md-info-label {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.md-info-value {
+  margin-top: 0.3rem;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ── Community Rating ─────────────────────────────────────────────────── */
+
+.md-rating-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.md-rating-average {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.md-rating-average small {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.md-rating-count {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+}
+
+.md-rating-your {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.md-stars {
+  display: flex;
+  gap: 0.15rem;
+  margin-top: 0.35rem;
+}
+
+.md-star {
+  color: var(--color-border);
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: color 150ms ease, transform 150ms ease;
+}
+
+.md-star:hover {
+  transform: scale(1.12);
+}
+
+.md-star.filled {
+  color: #ffd166;
+}
+
+.md-rating-status {
+  margin-top: 0.3rem;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+/* ── Community Reviews ────────────────────────────────────────────────── */
+
+.md-review-form {
+  padding: 1.1rem;
+  margin-bottom: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.md-review-textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: rgba(9, 10, 13, 0.88);
+  color: var(--color-text);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  resize: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.md-review-textarea:focus-visible {
+  border-color: rgba(229, 9, 20, 0.7);
+  box-shadow: 0 0 0 4px rgba(229, 9, 20, 0.12);
+  outline: none;
+}
+
+.md-review-form-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.md-review-cancel {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.md-review-cancel:hover {
+  color: var(--color-text);
+}
+
+.md-review-login-prompt {
+  margin-bottom: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.md-review-login-prompt a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.md-review-empty {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.md-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.md-review-card {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.md-review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.md-review-author {
+  color: var(--color-text);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.md-review-date {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+.md-review-body {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.md-review-footer {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.md-review-footer button {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.md-review-footer button:hover {
+  color: #ff6b73;
+}
+
+@media (max-width: 640px) {
+  .md-hero-inner {
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .md-badges,
+  .md-actions {
+    justify-content: center;
+  }
+
+  .md-add-to-list-panel {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .md-rating-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+}

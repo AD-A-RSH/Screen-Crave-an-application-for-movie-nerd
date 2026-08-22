@@ -1,0 +1,22 @@
+meta {
+  name: List Movie Reviews
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/movies/27205/reviews?page=1&limit=20
+  body: none
+  auth: none
+}
+
+params:query {
+  page: 1
+  limit: 20
+}
+
+docs {
+  Public endpoint — no auth needed. Returns all reviews for a movie,
+  each with the author's profiles.username joined in (see profiles
+  table, populated via the handle_new_user() trigger).
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Get List
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/lists/PASTE_LIST_ID_HERE
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+docs {
+  Returns the list plus its items (each with joined movie summary).
+  404 if the list doesn't exist or isn't yours.
+}

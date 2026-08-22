@@ -1,0 +1,26 @@
+meta {
+  name: Add List Item
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/api/lists/PASTE_LIST_ID_HERE/items
+  body: json
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+body:json {
+  {
+    "movie_id": 27205
+  }
+}
+
+docs {
+  Adding to a list you don't own returns 404 (RLS rejects the write,
+  mapped from Postgres error 42501 rather than leaking a 403).
+}

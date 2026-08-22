@@ -1,0 +1,28 @@
+meta {
+  name: Create Review
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/reviews
+  body: json
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+body:json {
+  {
+    "movie_id": 27205,
+    "body": "A mind-bending masterpiece."
+  }
+}
+
+docs {
+  Creates your review for a movie. Run this twice in a row to see the
+  409 ALREADY_EXISTS response (includes existing_review_id — use it in
+  Update/Delete Review below).
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Delete List
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/lists/PASTE_LIST_ID_HERE
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+docs {
+  Cascades to delete the list's list_items too (ON DELETE CASCADE).
+}

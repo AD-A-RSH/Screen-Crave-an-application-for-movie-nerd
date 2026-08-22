@@ -1,0 +1,66 @@
+/* Lists overview + list detail pages.
+   Shared primitives (.page, .page-header, .page-title, .pill-form,
+   the btn- classes, .empty-state, .list-item-wrapper) live in App.css --
+   this file only has what's actually specific to the lists grid + cards. */
+
+.lists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: clamp(var(--space-4), 2vw, var(--space-5));
+  width: 100%;
+}
+
+.list-card {
+  display: flex;
+  padding: 1.25rem 1.4rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card-rest);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.list-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-4px);
+}
+
+.list-card a {
+  overflow: hidden;
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-card a:hover {
+  color: #ff6b73;
+}
+
+/* Back link on the list-detail page */
+.list-detail-back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 180ms ease;
+}
+
+.list-detail-back:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .lists-grid {
+    grid-template-columns: 1fr;
+  }
+}

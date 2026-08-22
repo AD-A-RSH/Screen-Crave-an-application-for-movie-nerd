@@ -1,0 +1,15 @@
+meta {
+  name: List Watchlist
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/watchlist
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}

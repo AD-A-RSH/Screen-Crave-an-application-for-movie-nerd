@@ -1,0 +1,26 @@
+meta {
+  name: Update Review
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/api/reviews/PASTE_REVIEW_ID_HERE
+  body: json
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+body:json {
+  {
+    "body": "Updated: still a masterpiece."
+  }
+}
+
+docs {
+  Replace PASTE_REVIEW_ID_HERE with the id returned from Create Review.
+  Only works on your own review — editing someone else's returns 404.
+}

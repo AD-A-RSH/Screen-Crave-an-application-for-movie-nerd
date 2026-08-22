@@ -1,0 +1,21 @@
+meta {
+  name: Update List
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/lists/PASTE_LIST_ID_HERE
+  body: json
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+body:json {
+  {
+    "name": "Renamed List"
+  }
+}

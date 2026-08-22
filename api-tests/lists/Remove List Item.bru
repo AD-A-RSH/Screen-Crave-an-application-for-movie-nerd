@@ -1,0 +1,15 @@
+meta {
+  name: Remove List Item
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/api/lists/PASTE_LIST_ID_HERE/items/27205
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}

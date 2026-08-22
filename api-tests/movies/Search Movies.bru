@@ -1,0 +1,23 @@
+meta {
+  name: Search Movies
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/search?q=inception&page=1&limit=20
+  body: none
+  auth: none
+}
+
+params:query {
+  q: inception
+  page: 1
+  limit: 20
+}
+
+docs {
+  Trigram title search (pg_trgm-backed ILIKE). `query` is also accepted
+  as an alias for `q` for backwards compatibility with the Home page's
+  search bar.
+}

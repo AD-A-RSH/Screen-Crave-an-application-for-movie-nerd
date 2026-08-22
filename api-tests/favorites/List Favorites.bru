@@ -1,0 +1,15 @@
+meta {
+  name: List Favorites
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/favorites
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}

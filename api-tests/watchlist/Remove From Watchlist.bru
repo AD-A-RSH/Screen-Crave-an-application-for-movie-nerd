@@ -1,0 +1,19 @@
+meta {
+  name: Remove From Watchlist
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/api/watchlist/550
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+docs {
+  :id is the movie_id, not a watchlist row id.
+}

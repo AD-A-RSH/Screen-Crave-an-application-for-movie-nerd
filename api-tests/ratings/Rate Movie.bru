@@ -1,0 +1,27 @@
+meta {
+  name: Rate Movie
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/ratings
+  body: json
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+body:json {
+  {
+    "movie_id": 27205,
+    "rating": 5
+  }
+}
+
+docs {
+  Upserts your rating (1-5) for a movie. Try rating: 6 to see the 400
+  validation error, or remove the Cookie header to see 401.
+}

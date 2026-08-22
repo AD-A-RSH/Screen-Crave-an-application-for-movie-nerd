@@ -1,0 +1,20 @@
+meta {
+  name: Remove Favorite
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/api/favorites/550
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+docs {
+  :id is the movie_id, not a favorites row id. 204 on success, 404 if
+  it wasn't favorited.
+}

@@ -1,0 +1,26 @@
+meta {
+  name: Create List
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/lists
+  body: json
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+body:json {
+  {
+    "name": "Rainy Day Movies"
+  }
+}
+
+docs {
+  Returns 201 with the new list's id — use it in Get/Update/Delete List
+  and Add/Remove List Item below.
+}

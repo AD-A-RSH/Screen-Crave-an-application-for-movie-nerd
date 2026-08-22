@@ -1,0 +1,314 @@
+/* Main application content area */
+main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--page-width);
+  min-height: calc(100vh - 64px);
+  margin: 0 auto;
+  /* Full-width pages (movie detail) override this with their own padding */
+  padding: clamp(1.25rem, 3vw, 3rem);
+}
+
+/* Full-bleed pages should remove main's horizontal padding */
+main:has(.md-page) {
+  padding: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  main {
+    min-height: calc(100vh - 56px);
+    padding: 1rem;
+  }
+
+  main:has(.md-page) {
+    padding: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Shared primitives -- reused across every page so the app reads as one
+   consistent design system rather than a per-page one-off. Colors are
+   always the existing --color-* tokens; nothing new is introduced here.
+═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Page wrapper -- every top-level route content div uses this instead
+   of a one-off "width: 100%; padding: ..." rule per page. ─────────────── */
+.page {
+  width: 100%;
+  padding: clamp(1rem, 2vw, 2rem) 0 2rem;
+}
+
+.page > section + section {
+  margin-top: clamp(var(--space-6), 4vw, var(--space-7));
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: 0.5rem;
+  }
+}
+
+/* ── Page header (Home / Favorites / Lists) ─────────────────────────── */
+.page-header {
+  margin-bottom: clamp(var(--space-6), 4vw, var(--space-7));
+}
+
+.page-title {
+  color: #ffffff;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.page-subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ── Section title (used inside a page: "Your Watchlist", "Movie Information") ── */
+.section-title {
+  margin-bottom: var(--space-4);
+  color: #ffffff;
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* ── Button system ───────────────────────────────────────────────────
+   .btn-primary  -- the one filled call-to-action style (submit, create, sign up)
+   .btn-secondary -- outline/ghost utility actions (remove, delete, toggle)
+   .btn-secondary.is-active -- a secondary button in its "on" state (favorited, in watchlist)
+   Append .btn-sm for compact contexts (e.g. inside a movie card). */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.btn-primary {
+  border: 1px solid transparent;
+  background: var(--color-accent);
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(229, 9, 20, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  box-shadow: 0 10px 26px rgba(229, 9, 20, 0.36);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-border);
+  background: rgba(9, 10, 13, 0.6);
+  color: var(--color-text-muted);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: rgba(229, 9, 20, 0.5);
+  background: rgba(229, 9, 20, 0.12);
+  color: #ff6b73;
+}
+
+.btn-secondary.is-active {
+  border-color: rgba(255, 80, 91, 0.55);
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.btn-secondary.is-active:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  color: #ffffff;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.82rem;
+}
+
+/* ── Pill-shaped input+button bar -- the Search box and the "create a
+   list" form are the same visual pattern, so they share one definition. ── */
+.pill-form {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: min(100%, 680px);
+  margin: 0 auto clamp(var(--space-6), 4vw, 3rem);
+  padding: 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: rgba(24, 26, 32, 0.88);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.pill-form:focus-within {
+  border-color: rgba(229, 9, 20, 0.7);
+  box-shadow:
+    0 0 0 4px rgba(229, 9, 20, 0.12),
+    0 18px 45px rgba(0, 0, 0, 0.3);
+}
+
+.pill-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 1.2rem;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.pill-form input::placeholder {
+  color: #777a83;
+}
+
+@media (max-width: 640px) {
+  .pill-form {
+    margin-bottom: var(--space-6);
+  }
+
+  .pill-form input {
+    padding-left: 0.9rem;
+  }
+}
+
+/* ── Empty states -- every "nothing here yet" screen uses this ──────── */
+.empty-state {
+  width: min(100%, 620px);
+  margin: var(--space-6) auto;
+  padding: clamp(var(--space-6), 6vw, var(--space-8));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.12), transparent 55%),
+    rgba(19, 21, 26, 0.88);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  text-align: center;
+}
+
+.empty-state h2 {
+  margin-bottom: var(--space-2);
+  color: #ffffff;
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.empty-state p {
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.empty-state a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.empty-state a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* A lighter-weight empty message used *inside* an already-rendered page
+   (e.g. "your watchlist is empty" under a dashboard heading, or "no
+   results" under a search bar) -- .empty-state above is for when the
+   whole page has nothing else to show. */
+.empty-inline {
+  padding: var(--space-6) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(19, 21, 26, 0.6);
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ── Movie grid -- shared by Home, Search, Favorites, Lists ─────────── */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(210px, 100%), 1fr));
+  gap: clamp(var(--space-4), 2vw, var(--space-5));
+  width: 100%;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movies-grid > * {
+  animation: fade-in 360ms ease-out both;
+}
+
+/* A movie card paired with a small action button beneath it (Favorites,
+   Watchlist, and List-detail grids all reuse this). */
+.list-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.list-item-wrapper .btn-secondary {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .movies-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .movies-grid {
+    grid-template-columns: 1fr;
+  }
+}

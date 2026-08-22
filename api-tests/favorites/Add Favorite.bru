@@ -1,0 +1,27 @@
+meta {
+  name: Add Favorite
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/favorites
+  body: json
+  auth: none
+}
+
+headers {
+  Cookie: {{cookie}}
+}
+
+body:json {
+  {
+    "movie_id": 550
+  }
+}
+
+docs {
+  Returns 201 on first add, 200 if it already existed (idempotent).
+  Try movie_id: 999999999 to see 404 (foreign key violation mapped to
+  "referenced movie does not exist").
+}
